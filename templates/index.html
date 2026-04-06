@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Password Engine</title>
+    <!-- Cinematic Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Poppins:wght@300;400;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- Background Effects -->
+    <div id="ambient-canvas"></div>
+    <div class="cursor-flame-source" id="flame-container"></div>
+    <div class="cursor-core"></div>
+
+    <main class="app-container" id="perspective-wrapper">
+        <section class="glass-card main-generator" id="tilt-card">
+            <header>
+                <h1 class="hero-title" data-text="AI Password Engine">
+                    AI Password Engine
+                </h1>
+                <p class="subtitle">Military-grade password generation powered by Python</p>
+            </header>
+
+            <div class="output-container">
+                <div class="password-display" id="password-display">
+                    <span id="password-text" class="placeholder">Awaiting Command...</span>
+                    <div class="cursor-blink"></div>
+                </div>
+                <div class="output-actions">
+                    <button class="icon-btn" id="copy-btn" title="Copy to clipboard">
+                        <i class="fa-regular fa-copy"></i>
+                    </button>
+                    <button class="icon-btn" id="regen-btn" title="Regenerate">
+                        <i class="fa-solid fa-rotate-right"></i>
+                    </button>
+                </div>
+                
+                <!-- Advanced Metrics Overlay -->
+                <div class="metrics-layer">
+                    <div class="strength-indicator">
+                        <div class="strength-bar">
+                            <div class="strength-fill" id="strength-fill"></div>
+                        </div>
+                        <span class="strength-label" id="strength-label">SYSTEM READY</span>
+                    </div>
+                    <div class="entropy-indicator">
+                        <i class="fa-solid fa-shield-halved"></i> Entropy: <span id="entropy-val" class="glow-text">0</span> Bits
+                    </div>
+                </div>
+            </div>
+
+            <div class="controls-container">
+                <div class="control-group length-group">
+                    <div class="control-header">
+                        <label for="length-slider">Vector Length</label>
+                        <span id="length-val" class="length-value">16</span>
+                    </div>
+                    <!-- Range max changed to 64 as per requirements -->
+                    <input type="range" id="length-slider" min="6" max="64" value="16" class="neon-slider">
+                </div>
+
+                <div class="toggles-container">
+                    <label class="toggle-row">
+                        <span class="toggle-label">Uppercase (A-Z)</span>
+                        <div class="neon-switch">
+                            <input type="checkbox" id="chk-upper" checked>
+                            <span class="slider round"></span>
+                        </div>
+                    </label>
+
+                    <label class="toggle-row">
+                        <span class="toggle-label">Lowercase (a-z)</span>
+                        <div class="neon-switch">
+                            <input type="checkbox" id="chk-lower" checked>
+                            <span class="slider round"></span>
+                        </div>
+                    </label>
+
+                    <label class="toggle-row">
+                        <span class="toggle-label">Numbers (0-9)</span>
+                        <div class="neon-switch">
+                            <input type="checkbox" id="chk-numbers" checked>
+                            <span class="slider round"></span>
+                        </div>
+                    </label>
+
+                    <label class="toggle-row">
+                        <span class="toggle-label">Symbols (!@#$)</span>
+                        <div class="neon-switch">
+                            <input type="checkbox" id="chk-symbols" checked>
+                            <span class="slider round"></span>
+                        </div>
+                    </label>
+                </div>
+
+                <button class="btn-generate pulse-hover" id="generate-btn">
+                    <span class="btn-text">INITIALIZE ENGINE</span>
+                    <i class="fa-solid fa-fire-flame-curved bg-icon"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- History Section -->
+        <section class="glass-card history-section disabled" id="history-section">
+            <div class="history-header">
+                <h2><i class="fa-solid fa-database"></i> Secure Buffer Log</h2>
+            </div>
+            <ul class="history-list" id="history-list">
+                <!-- History items injected by JS -->
+            </ul>
+        </section>
+    </main>
+    
+    <!-- Toast Notification -->
+    <div class="toast-popup" id="toast-popup">
+        <i class="fa-solid fa-circle-check"></i> Copied to clipboard!
+    </div>
+
+    <!-- Sound Effects -->
+    <audio id="sfx-generate" src="https://cdn.pixabay.com/download/audio/2022/01/18/audio_82c2a0d9e1.mp3?filename=data-reveal-sound-6460.mp3" preload="auto"></audio>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
